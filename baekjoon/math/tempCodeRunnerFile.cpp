@@ -1,2 +1,6 @@
+    // while(n >= 0) {
+    //     int num = floor(sqrt(n));
+    //     cout << num << " ";
 
-    cin >> n;
+    //     n -= num * num;
+    // }
