@@ -65,6 +65,7 @@ int bfsBoard(vector<vector<string> > board, Position start, Position end) {
     return 0;
 }
 
+// 6593
 int main() {
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
