@@ -4,7 +4,7 @@
 #include <queue>
 using namespace std;
 
-int R, C;
+int T, R, C;
 string board[1010];
 bool visited[1010][1010];
 int dy[4] = {-1, 0, 1, 0};
@@ -29,17 +29,17 @@ bool safe(Position p) {
 
 int solve() {
     // 불과 지훈이의 움직임을 각각 처리하기 위한 큐
-    queue<pair<Position, int>> q_fire;
-    queue<pair<Position, int>> q_jihun;
+    queue<pair<Position, int> > q_fire;
+    queue<pair<Position, int> > q_jihun;
 
     // 초기 위치 설정
     for(int i=0; i<R; i++) {
         for(int j=0; j<C; j++) {
-            if(board[i][j] == 'J') {
-                q_jihun.push({Position(i, j), 0});
+            if(board[i][j] == '@') {
+                q_jihun.push(make_pair(Position(i, j), 0));
                 visited[i][j] = true;
-            } else if(board[i][j] == 'F') {
-                q_fire.push({Position(i, j), 0});
+            } else if(board[i][j] == '*') {
+                q_fire.push(make_pair(Position(i, j), 0));
             }
         }
     }
@@ -58,7 +58,7 @@ int solve() {
                 // 빈 칸이면 불 확산
                 if(safe(next) && board[next.y][next.x] == '.') {
                     board[next.y][next.x] = 'F';
-                    q_fire.push({next, 0});
+                    q_fire.push(make_pair(next, 0));
                 }
             }
         }
@@ -81,7 +81,7 @@ int solve() {
                 // 안전하고 방문하지 않은 빈 칸으로 이동
                 if(safe(next) && board[next.y][next.x] == '.' && !visited[next.y][next.x]) {
                     visited[next.y][next.x] = true;
-                    q_jihun.push({next, time + 1});
+                    q_jihun.push(make_pair(next, time + 1));
                 }
             }
         }
@@ -90,18 +90,30 @@ int solve() {
     return -1;
 }
 
+void initVisited() {
+    for(int i=0; i<R; i++) 
+        for(int j=0; j<C; j++) 
+            visited[i][j] = false;
+}
+
 int main() {
     cin.tie(nullptr);
     ios_base::sync_with_stdio(false);
 
-    cin >> R >> C;
-    for(int i=0; i<R; i++) {
-        cin >> board[i];
+    cin >> T;
+    for(int t=0; t<T; t++) {
+        cin >> C >> R;
+        for(int i=0; i<R; i++) {
+            cin >> board[i];
+        }
+
+        int result = solve();
+        if(result == -1) cout << "IMPOSSIBLE\n";
+        else cout << result << "\n";
+        initVisited();
     }
 
-    int result = solve();
-    if(result == -1) cout << "IMPOSSIBLE\n";
-    else cout << result << "\n";
+   
 
     return 0;
 }
