@@ -14,4 +14,4 @@ int main() {
     sort(score, score+n);
     cout << score[n-k];
     return 0;
-}
+} 

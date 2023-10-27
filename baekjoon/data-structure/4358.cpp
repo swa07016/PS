@@ -9,6 +9,7 @@ using namespace std;
 map<string, int> dict;
 int total;
 
+// 4358
 int main() {
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
