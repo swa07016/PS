@@ -19,10 +19,12 @@ public:
 
 // 최소 힙을 위한 비교 함수 객체
 struct CompareEnd {
+    // 반환값이 true이면 swap 하겠다.
     bool operator()(const int& a, const int& b) {
         return a > b;
     }
 };
+
 
 int main() {
     cin.tie(nullptr);
